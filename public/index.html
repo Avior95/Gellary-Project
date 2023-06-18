@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+    <title>Gallery</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" id="nav-home-link" href="#">
+                <img src="/public/assets/imgs/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto my-2 my-lg-0">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="nav-about-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="nav-addPic-link">Add Pic</a>
+                    </li>
+
+                </ul>
+                <form class="d-flex responsive-nav-flex" role="search" id="navBeforeLogin">
+                    <a class="nav-link me-3" href="#" id="nav-signUp-link">Sign Up</a>
+                    <a class="nav-link responsive-mt" href="#" id="nav-loginus-link">Login</a>
+                </form>
+                <form class="d-flex responsive-nav-flex d-none" role="search" id="navAfterLogin">
+                    <a class="nav-link me-3" href="#" id="nav-edit-profile-page">Name</a>
+                    <a class="nav-link responsive-mt" href="#" id="nav-logout">Logout</a>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+
+    <main>
+        <div id="home-page" class="d-block">
+            <h1>Home page</h1>
+            <hr>
+            <h2 id="home-page-subtitle" class="fs-5">
+                “Art is not a thing, it is a way.” – Elbert Hubbard.
+                <br>
+                <br>
+
+                <div class="popup-wrapper d-flex justify-content-center align-items-center d-none" id="editCardPopup">
+                    <div class="popup-div" id="editCardPopupChild">
+                        <div class="card">
+                            <h6 id="newPic-title"></h6>
+                            <img src="" class="card-img-top" alt="" id="editCardPopupImgDisplay" />
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="editCardPopupUrl"
+                                            placeholder="Url" />
+                                        <label for="editCardPopupUrl">Url</label>
+                                        <div class="alert alert-danger d-none" role="alert" id="url-alert">
+                                            Name rules
+                                        </div>
+                                    </div>
+                                </h5>
+                                <div class="card-text">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="alt"
+                                            id="editCardPopupDescription"></textarea>
+                                        <label for="editCardPopupDescription">Alt</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="editCardPopupCredits"
+                                            placeholder="Credits" />
+                                        <label for="editCardPopupCredits">Credits</label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="editCardPopupPrice"
+                                            placeholder="Price" />
+                                        <label for="editCardPopupPrice">Price</label>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                <button type="button" class="btn btn-success" id="editCardPopupSaveBtn">
+                                    <i class="bi bi-check-circle-fill"></i> Save
+                                </button>
+                                <button type="button" class="btn btn-danger" id="editCardPopupCancelBtn">
+                                    <i class="bi bi-x-circle-fill" id="editCardPopupCancelBtnIcon"></i>
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-2 d-block" id="icons-container">
+                    <div>
+                        <button type="button" class="btn btn-info" id="homeDisplayList">
+                            <i class="bi bi-card-list"></i>
+                        </button>
+                        <button type="button" class="btn btn-info" id="homeDisplayGallery">
+                            <i class="bi bi-microsoft"></i>
+                        </button>
+                        <button type="button" class="btn btn-info" id="homeDisplayCousel">
+                            <i class="bi bi-file-earmark-slides"></i>
+                        </button>
+                        <button type="button" class="btn btn-info" id="homeDisplaySortASC">
+                            <i class="bi bi-sort-alpha-down"></i>
+                        </button>
+                        <button type="button" class="btn btn-info" id="homeDisplaySortDESC">
+                            <i class="bi bi-sort-alpha-up"></i>
+                        </button>
+                    </div>
+
+                    <form class="d-flex align-self-end " role="search">
+                        <input class="form-control me-2 d-none" type="search" placeholder="Search" aria-label="Search"
+                            id="homeDisplaySearch" />
+                    </form>
+                </div>
+
+                <div id="cards-carusel-container" class="d-none page container">
+                    <h2>Carousel Display</h2>
+                    <hr>
+                    <div id="photosCarousel" class="carousel slide w-75 mx-auto">
+                        <div class="carousel-inner mx-auto" id="innerCarousel">
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#photosCarousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#photosCarousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="cards-Gallery-container" class="d-none">
+                    <div class="container">
+                        <div id="home-page-cards-gallery-Injection" class="row"></div>
+                    </div>
+
+
+                </div>
+                <div id="cards-table-container" class="d-none">
+                    <table id="home-page-cards-table-Injection" class="table container">
+                    </table>
+                </div>
+        </div>
+        </div>
+        <div id="about-page" class="d-none">
+
+            <!-- כותרות אודות -->
+            <div class="center mt-4">
+                <div class="col-12 col-md-10 col-xl-8">
+                    <h1 class="text-center display-4">ABOUT PAGE</h1>
+                    <h2 class="fs-5">
+                        Here you will find an explanation of how the app works
+                    </h2>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="row p-4">
+                <div class="col-12 col-md-6 center center">
+                    <img class="img-fluid" src="./assets/imgs/slider-display.png" alt="cards display">
+                </div>
+                <div class="col-12 col-md-6 center px-5">
+                    <div>
+                        <h2 class="text-center">Slider Display</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Nesciunt deserunt in iste porro aut et quo, rerum fugiat cumque
+                            dolor ullam voluptatum quod aliquam quas! Harum ab tempora
+                            placeat culpa?
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row bg-dark p-4">
+                <div class="col-12 col-md-8 center">
+                    <img class="img-fluid" src="./assets/imgs/cards.png" alt="cards display">
+                </div>
+                <div class="col-12 col-md-4 center text-light">
+                    <div class="px-4">
+                        <h2 class="text-center">Cards Display</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Nesciunt deserunt in iste porro aut et quo, rerum fugiat cumque
+                            dolor ullam voluptatum quod aliquam quas! Harum ab tempora
+                            placeat culpa?
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4 bg-light p-4">
+                <div class="col-12 col-md-4 center">
+                    <div class="px-4">
+                        <h2 class="text-center">Table Display</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Nesciunt deserunt in iste porro aut et quo, rerum fugiat cumque
+                            dolor ullam voluptatum quod aliquam quas! Harum ab tempora
+                            placeat culpa?
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-8 center">
+                    <img class="img-fluid" src="./assets/imgs/table-display.png" alt="cards display">
+                </div>
+            </div>
+
+        </div>
+
+        <div id="pic-details-container" class="d-none">
+            <div class="center mt-4">
+                <div class="col-12 col-md-10 col-xl-8">
+                    <h1 id="h1-title-details" class="text-center display-4"></h1>
+                    <h2 id="h2-title-details" class="fs-5">Hear you can find details about the picture: </h2>
+                    <hr>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row mx-0">
+                    <div class="card col-12 col-md-6 col-xl-6 p-2 border-0">
+                        <div>Published At :<span class="fw-bold">3/3/2023, 5:33:23 PM</span></div>
+                        <div>Credits :<span id="credits-details" class="fw-bold"></span></div>
+                        <div>Price :<span id="price-details" class="fw-bold"></span>$</div>
+                        <div>Id :<span id="id-details" class="fw-bold"></span></div>
+                        <div>Url :<span id="Url-details" class="fw-bold"></span></span>
+                        </div>
+                    </div>
+                    <div class="center col-12 col-md-6 col-xl-6  p-2  mb-2">
+                        <img id="img-details" src="" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div id="sign-Up" class="d-none">
+            <h1 class="text-center display-4">SIGNUP PAGE</h1>
+            <hr>
+            <div class="bg-light">
+                <div class="center pt-4">
+                    <div class="col-12 col-md-10 col-xl-8">
+                    </div>
+                </div>
+
+                <div class="center">
+                    <form class="form col-12 col-md-10 col-xl-8 border p-2 rounded">
+                        <h6>Name</h6>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <label for="first-name-signup-field">First Name<span
+                                        class="text-danger">*</span></label>
+                                <input class="form-control mb-2" type="text" name="first" id="firstName-signup-input"
+                                    minlength="2" autocomplete="off" autocomplete="off" placeholder="Your name" />
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="signUp-alert-name">
+                                Name rules
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label for="last-name-signup-field">Last Name<span class="text-danger">*</span></label>
+                                <input class="form-control mb-2" type="text" name="last" id="lastName-signup-input"
+                                    autocomplete="off" />
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="signUp-alert-lestName">
+                                Name rules
+                            </div>
+                        </div>
+                        <h6>Address</h6>
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <label for="state-signup-field">State</label>
+                                <input autocomplete="off" class="form-control mb-2" type="text" name="state"
+                                    id="state-signup-input" />
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <label for="country-signup-field">Country</label>
+                                <input autocomplete="off" class="form-control mb-2" type="text" name="country"
+                                    id="country-signup-input" />
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <label for="city-signup-field">City</label>
+                                <input autocomplete="off" class="form-control mb-2" type="text" name="city"
+                                    id="city-signup-input" />
+                                <!-- <span id="city-signup-error-span" class="text-danger"></span> -->
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <label for="street-signup-field">Street</label>
+                                <input autocomplete="off" class="form-control mb-2" type="text" name="street"
+                                    id="street-signup-input" />
+                                <!-- <span id="street-signup-error-span" class="text-danger"></span> -->
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <label for="house-signup-field">House Number</label>
+                                <input autocomplete="off" class="form-control mb-2" type="number" name="house"
+                                    id="house-signup-input" />
+                                <!-- <span id="house-signup-error-span" class="text-danger"></span> -->
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <label for="zip-signup-field">Zip Code</label>
+                                <input autocomplete="off" class="form-control mb-2" type="number" name="zip"
+                                    id="zip-signup-input" />
+                                <!-- <span id="zip-signup-error-span" class="text-danger"></span> -->
+                            </div>
+                        </div>
+                        <h6>Means of contact</h6>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <label for="email-signup-field">Email<span class="text-danger">*</span></label>
+                                <input autocomplete="off" class="form-control mb-2" type="text" name="email"
+                                    id="email-signup-input" minlength="2" />
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="signUp-alert-Email">
+                                Name rules
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label for="phone-signup-field">Phone</label>
+                                <input autocomplete="off" class="form-control mb-2" type="text" name="phone"
+                                    id="phone-signup-input" />
+                                <!-- <span id="phone-signup-error-span" class="text-danger"></span> -->
+                            </div>
+                        </div>
+                        <h6>Security</h6>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <label for="password-signup-field">Password<span class="text-danger">*</span></label>
+                                <input autocomplete="off" class="form-control mb-2" type="password" name="password"
+                                    id="password-signup-input" minlength="2" />
+                                <!-- <span id="password-signup-error-span" class="text-danger"></span> -->
+                                <div class="alert alert-danger d-none" role="alert" id="signUp-alert-password">
+                                    Name rules
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="password-reenter-signup-field">Re-enter Password<span
+                                        class="text-danger">*</span></label>
+                                <input autocomplete="off" class="form-control mb-2" type="password"
+                                    name="passwordReEnter" id="password-reenter-signup-field" minlength="2" />
+                                <span id="password-reenter-signup-error-span" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="center my-2">
+                            <div>
+                                <label for="isBiz-signup-field">Business Client</label>
+                                <input autocomplete="off" class="form-check-inline mb-2" type="checkbox" name="isBiz"
+                                    id="isBiz-signup-checkBox" />
+                            </div>
+                        </div>
+
+
+                        <button class="btn btn-primary col-12 mb-2" disabled="true" id="submit-signup-user-btn">
+                            Submit
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="profile-page" class="d-none">
+            <div class="bg-light">
+                <!-- כותרות הרשמה -->
+                <div class="center pt-4">
+                    <div class="col-12 col-md-10 col-xl-8">
+                        <h1 class="text-center display-4">EDIT USER PAGE</h1>
+                        <h2 class="fs-5">Hear you can edit your profile</h2>
+                        <hr />
+                    </div>
+                </div>
+                <div class="center">
+                    <form class="form col-12 col-md-10 col-xl-8 border p-2 rounded">
+                        <h6>Name</h6>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <label for="first-name-profile-field">First Name<span
+                                        class="text-danger">*</span></label>
+                                <input class="form-control mb-2" type="text" name="first" id="firstName-profile-input"
+                                    minlength="2" autocomplete="off" autocomplete="off" placeholder="Your name" />
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="profile-alert-name">
+                                Name rules
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label for="last-name-profile-field">Last Name<span class="text-danger">*</span></label>
+                                <input class="form-control mb-2" type="text" name="last" id="lastName-profile-input"
+                                    autocomplete="off" />
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="profile-alert-lestName">
+                                Name rules
+                            </div>
+                        </div>
+                        <h6>Address</h6>
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <label for="state-profile-field">State</label>
+                                <input autocomplete="off" class="form-control mb-2" type="text" name="state"
+                                    id="state-profile-input" />
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <label for="country-profile-field">Country</label>
+                                <input autocomplete="off" class="form-control mb-2" type="text" name="country"
+                                    id="country-profile-input" />
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <label for="city-profile-field">City</label>
+                                <input autocomplete="off" class="form-control mb-2" type="text" name="city"
+                                    id="city-profile-input" />
+                                <!-- <span id="city-profile-error-span" class="text-danger"></span> -->
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <label for="street-profile-field">Street</label>
+                                <input autocomplete="off" class="form-control mb-2" type="text" name="street"
+                                    id="street-profile-input" />
+                                <!-- <span id="street-profile-error-span" class="text-danger"></span> -->
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <label for="house-profile-field">House Number</label>
+                                <input autocomplete="off" class="form-control mb-2" type="number" name="house"
+                                    id="house-profile-input" />
+                                <!-- <span id="house-profile-error-span" class="text-danger"></span> -->
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <label for="zip-profile-field">Zip Code</label>
+                                <input autocomplete="off" class="form-control mb-2" type="number" name="zip"
+                                    id="zip-profile-input" />
+                                <!-- <span id="zip-profile-error-span" class="text-danger"></span> -->
+                            </div>
+                        </div>
+                        <h6>Means of contact</h6>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <label for="email-profile-field">Email<span class="text-danger">*</span></label>
+                                <input autocomplete="off" class="form-control mb-2" type="text" name="email"
+                                    id="email-profile-input" minlength="2" />
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" id="profile-alert-Email">
+                                Name rules
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label for="phone-profile-field">Phone</label>
+                                <input autocomplete="off" class="form-control mb-2" type="text" name="phone"
+                                    id="phone-profile-input" />
+                                <!-- <span id="phone-profile-error-span" class="text-danger"></span> -->
+                            </div>
+                        </div>
+                        <h6>Security</h6>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <label for="password-profile-field">Password<span class="text-danger">*</span></label>
+                                <input autocomplete="off" class="form-control mb-2" type="password" name="password"
+                                    id="password-profile-input" minlength="2" />
+                                <!-- <span id="password-profile-error-span" class="text-danger"></span> -->
+                                <div class="alert alert-danger d-none" role="alert" id="profile-alert-password">
+                                    Name rules
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="password-reenter-profile-field">Re-enter Password<span
+                                        class="text-danger">*</span></label>
+                                <input autocomplete="off" class="form-control mb-2" type="password"
+                                    name="passwordReEnter" id="password-reenter-profile-field" minlength="2" />
+
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert"
+                                id="password-reenter-profile-field-alert">
+                                Name rules
+                            </div>
+
+                        </div>
+                        <div class="center my-2">
+                            <div>
+                                <label for="isBiz-profile-field">Business Client</label>
+                                <input autocomplete="off" class="form-check-inline mb-2" type="checkbox" name="isBiz"
+                                    id="isBiz-profile-checkBox" />
+                            </div>
+                        </div>
+                        <button class="btn btn-primary col-12 mb-2" disabled="true" id="update-profile-btn">
+                            Update
+                        </button>
+                        <button class="btn btn-danger col-12 mb-2" disabled="true" id=" cancel-profile-btn">
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login -->
+        <div id="login" class="d-none">
+            <div class="center mt-4">
+                <div class="col-12 col-md-10 col-xl-8">
+                    <h1 class="text-center display-4">LOGIN PAGE</h1>
+                    <hr />
+                </div>
+            </div>
+            <div class="center h50">
+                <form class="form bg-light col-12 col-md-6 col-xl-4 border rounded p-3">
+                    <div class="col-12">
+                        <label for="login-email">Email <span class="text-danger">*</span>
+                        </label>
+                        <input placeholder="user@gmail.com" id="login-email" class="form-control " name="login-email"
+                            type="email" autocomplete="off" />
+
+                    </div>
+                    <div class="alert alert-danger d-none" role="alert" id="login-email-error">
+                        Name rules
+                    </div>
+
+
+                    <div class="col-12">
+                        <label for="login-password">Password <span class="text-danger">*</span>
+                        </label>
+                        <input placeholder="enter password" id="login-password" class="form-control"
+                            name="login-password" type="password" autocomplete="off" />
+                        <!-- <span id="login-password-error" class="text-danger"></span> -->
+                    </div>
+                    <div class="alert alert-danger d-none" role="alert" id="login-password-error">
+                        Name rules
+                    </div>
+
+                    <div class="col-12">
+                        <!-- <button class="btn btn-primary col-12 my-2" id="submit-login-btn">
+                            Login
+                        </button> -->
+                        <button class="btn btn-primary col-12 mb-2" id="submit-login-btn" type="button">Login</button>
+
+                        <button type="button" class="btn btn-danger col-12 mb-2" value="Cancel"
+                            id="cancel-login-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+        <div id="page-not-found-page" class="d-none">
+            <div class="center mt-4">
+                <div class="col-12 col-md-10 col-xl-8">
+                    <h1 class="text-center display-4">ERROR 404</h1>
+                    <h2 class="fs-5">Page not found</h2>
+                    <hr />
+                    <p id="return-to-home-page-link" class="cursor text-primary">
+                        click here to return to the home page...
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="border-top pt-3 bg-dark center">
+        <p class="text-light">Created by Avior Kasay &copy;</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+        </script>
+    <script src="../app.js" type="module"></script>
+
+</body>
+
+</html>
